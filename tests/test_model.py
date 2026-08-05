@@ -3,19 +3,24 @@
 from pathlib import Path
 
 
-MODEL_PATH = Path("ai_model/models/driver_fatigue_model.h5")
+MODEL_FILES = [
+    Path("driver_fatigue_model.h5"),
+    Path("driver_fatigue_model.tflite"),
+]
 
 
-def test_model_file_location():
-    """Verify expected model directory structure."""
-    assert MODEL_PATH.parent.name == "models"
+def test_model_files_location():
+    """Verify model files are present in repository."""
+    assert any(path.exists() for path in MODEL_FILES)
 
 
 def test_model_file_extension():
-    """Verify supported TensorFlow model format."""
-    assert MODEL_PATH.suffix in {".h5", ".tflite"}
+    """Verify supported TensorFlow model formats."""
+    for model in MODEL_FILES:
+        assert model.suffix in {".h5", ".tflite"}
 
 
 def test_model_path_is_relative():
     """Prevent hardcoded absolute machine paths."""
-    assert not MODEL_PATH.is_absolute()
+    for model in MODEL_FILES:
+        assert not model.is_absolute()
