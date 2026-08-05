@@ -1,0 +1,13 @@
+opencv-python
+mediapipe
+numpy
+pandas
+scikit-learn
+matplotlib
+tensorflow
+flask
+flask-cors
+pyttsx3
+pygame
+imutils
+python-dotenv
