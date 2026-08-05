@@ -10,17 +10,17 @@ MODEL_FILES = [
 
 
 def test_model_files_location():
-    """Verify model files are present in repository."""
+    """Verify model files exist."""
     assert any(path.exists() for path in MODEL_FILES)
 
 
 def test_model_file_extension():
-    """Verify supported TensorFlow model formats."""
+    """Verify supported TensorFlow formats."""
     for model in MODEL_FILES:
         assert model.suffix in {".h5", ".tflite"}
 
 
 def test_model_path_is_relative():
-    """Prevent hardcoded absolute machine paths."""
+    """Prevent absolute machine paths."""
     for model in MODEL_FILES:
         assert not model.is_absolute()
