@@ -11,3 +11,4 @@ pyttsx3
 pygame
 imutils
 python-dotenv
+pytest
