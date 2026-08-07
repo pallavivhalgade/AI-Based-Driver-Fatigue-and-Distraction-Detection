@@ -1,26 +1,25 @@
-"""Model validation tests."""
+name: Python Tests
 
-from pathlib import Path
+on:
+  push:
+  pull_request:
 
+jobs:
+  test:
+    runs-on: ubuntu-latest
 
-MODEL_FILES = [
-    Path("driver_fatigue_model.h5"),
-    Path("driver_fatigue_model.tflite"),
-]
+    steps:
+      - uses: actions/checkout@v4
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
 
-def test_model_files_location():
-    """Verify model files exist."""
-    assert any(path.exists() for path in MODEL_FILES)
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest
 
-
-def test_model_file_extension():
-    """Verify supported TensorFlow formats."""
-    for model in MODEL_FILES:
-        assert model.suffix in {".h5", ".tflite"}
-
-
-def test_model_path_is_relative():
-    """Prevent absolute machine paths."""
-    for model in MODEL_FILES:
-        assert not model.is_absolute()
+      - name: Run tests
+        run: python -m pytest
