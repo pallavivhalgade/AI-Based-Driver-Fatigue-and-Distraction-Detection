@@ -12,3 +12,4 @@ pygame
 imutils
 python-dotenv
 pytest
+pytest>=8.0
