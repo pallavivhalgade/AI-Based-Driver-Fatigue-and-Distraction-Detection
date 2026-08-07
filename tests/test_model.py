@@ -1,25 +1,11 @@
-name: Python Tests
+from pathlib import Path
 
-on:
-  push:
-  pull_request:
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
+def test_model_file_exists():
+    model_path = Path("driver_fatigue_model.h5")
+    assert model_path.exists(), f"Model file not found: {model_path}"
 
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pytest
-
-      - name: Run tests
-        run: python -m pytest
+def test_model_file_not_empty():
+    model_path = Path("driver_fatigue_model.h5")
+    assert model_path.stat().st_size > 0
