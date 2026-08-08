@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -63,16 +65,25 @@ class PolishedSplash extends StatefulWidget {
 }
 
 class _PolishedSplashState extends State<PolishedSplash> {
+  Timer? _navigationTimer;
+
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 1200), () {
+    _navigationTimer = Timer(const Duration(milliseconds: 1200), () {
       if (!mounted) return;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const PolishedLogin()),
       );
     });
+  }
+
+  @override
+  void dispose() {
+    _navigationTimer?.cancel();
+    _navigationTimer = null;
+    super.dispose();
   }
 
   @override
