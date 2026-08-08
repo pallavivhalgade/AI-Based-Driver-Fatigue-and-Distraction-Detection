@@ -311,15 +311,34 @@ class _SafetyHome extends StatelessWidget {
                 gradient: const LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [Color(0xFF12304A), Color(0xFF0B1B2A)]),
                 border: Border.all(color: Color(0xFF214A68)),
               ),
-              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Row(children: [Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6), decoration: BoxDecoration(color: const Color(0xFF1BCB78).withOpacity(.12), borderRadius: BorderRadius.circular(20)), child: const Row(children: [Icon(Icons.circle, size: 7, color: Color(0xFF27D77F)), SizedBox(width: 6), Text('SYSTEM READY', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w800, color: Color(0xFF27D77F))])), const Spacer(), const Text('LOCAL AI', style: TextStyle(fontSize: 10, color: Color(0xFF7F9BB1), fontWeight: FontWeight.w800))]),
-                const SizedBox(height: 24),
-                const Text('Drive with confidence.', style: TextStyle(fontSize: 28, fontWeight: FontWeight.w800)),
-                const SizedBox(height: 8),
-                const Text('Monitor fatigue, yawning and driver attention in real time.', style: TextStyle(color: Color(0xFF9BB0C1), height: 1.45)),
-                const SizedBox(height: 20),
-                SizedBox(width: double.infinity, height: 56, child: FilledButton.icon(onPressed: () => _start(context), icon: const Icon(Icons.videocam_outlined), label: const Text('Start Monitoring', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16)))),
-              ]),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        decoration: BoxDecoration(color: const Color(0xFF1BCB78).withOpacity(.12), borderRadius: BorderRadius.circular(20)),
+                        child: const Row(
+                          children: [
+                            Icon(Icons.circle, size: 7, color: Color(0xFF27D77F)),
+                            SizedBox(width: 6),
+                            Text('SYSTEM READY', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w800, color: Color(0xFF27D77F))),
+                          ],
+                        ),
+                      ),
+                      const Spacer(),
+                      const Text('LOCAL AI', style: TextStyle(fontSize: 10, color: Color(0xFF7F9BB1), fontWeight: FontWeight.w800)),
+                    ],
+                  ),
+                  const SizedBox(height: 24),
+                  const Text('Drive with confidence.', style: TextStyle(fontSize: 28, fontWeight: FontWeight.w800)),
+                  const SizedBox(height: 8),
+                  const Text('Monitor fatigue, yawning and driver attention in real time.', style: TextStyle(color: Color(0xFF9BB0C1), height: 1.45)),
+                  const SizedBox(height: 20),
+                  SizedBox(width: double.infinity, height: 56, child: FilledButton.icon(onPressed: _start, icon: const Icon(Icons.videocam_outlined), label: const Text('Start Monitoring', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16)))),
+                ],
+              ),
             ),
           ),
         ),
@@ -333,14 +352,17 @@ class _SafetyHome extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(18),
               decoration: BoxDecoration(color: const Color(0xFF0C1B2A), borderRadius: BorderRadius.circular(22), border: Border.all(color: const Color(0xFF172F44))),
-              child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text('Protection overview', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
-                SizedBox(height: 15),
-                _ProtectionRow(Icons.visibility_outlined, 'Eye & fatigue detection', 'Ready'),
-                _ProtectionRow(Icons.face_retouching_natural_outlined, 'Yawn detection', 'Ready'),
-                _ProtectionRow(Icons.screen_lock_portrait_outlined, 'Attention monitoring', 'Ready'),
-                _ProtectionRow(Icons.notifications_active_outlined, 'Voice alerts', 'Enabled'),
-              ]),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Protection overview', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+                  SizedBox(height: 15),
+                  _ProtectionRow(Icons.visibility_outlined, 'Eye & fatigue detection', 'Ready'),
+                  _ProtectionRow(Icons.face_retouching_natural_outlined, 'Yawn detection', 'Ready'),
+                  _ProtectionRow(Icons.screen_lock_portrait_outlined, 'Attention monitoring', 'Ready'),
+                  _ProtectionRow(Icons.notifications_active_outlined, 'Voice alerts', 'Enabled'),
+                ],
+              ),
             ),
           ),
         ),
@@ -352,7 +374,13 @@ class _SafetyHome extends StatelessWidget {
 Widget _metric(String value, String label, IconData icon, Color color) => Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(color: const Color(0xFF0C1B2A), borderRadius: BorderRadius.circular(20), border: Border.all(color: const Color(0xFF172F44))),
-      child: Row(children: [Container(width: 38, height: 38, decoration: BoxDecoration(color: color.withOpacity(.1), borderRadius: BorderRadius.circular(12)), child: Icon(icon, color: color, size: 20)), const SizedBox(width: 10), Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(value, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16)), const SizedBox(height: 2), Text(label, style: const TextStyle(color: Color(0xFF7F96AA), fontSize: 11))]))]),
+      child: Row(
+        children: [
+          Container(width: 38, height: 38, decoration: BoxDecoration(color: color.withOpacity(.1), borderRadius: BorderRadius.circular(12)), child: Icon(icon, color: color, size: 20)),
+          const SizedBox(width: 10),
+          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(value, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16)), const SizedBox(height: 2), Text(label, style: const TextStyle(color: Color(0xFF7F96AA), fontSize: 11))])),
+        ],
+      ),
     );
 
 class _ProtectionRow extends StatelessWidget {
@@ -361,5 +389,5 @@ class _ProtectionRow extends StatelessWidget {
   final String status;
   const _ProtectionRow(this.icon, this.title, this.status);
   @override
-  Widget build(BuildContext context) => Padding(padding: const EdgeInsets.symmetric(vertical: 9), child: Row(children: [Icon(icon, size: 20, color: const Color(0xFF5AAEFF)), const SizedBox(width: 12), Expanded(child: Text(title, style: const TextStyle(color: Color(0xFFB9C8D5)))), const Text('Ready', style: TextStyle(color: Color(0xFF27D77F), fontSize: 11, fontWeight: FontWeight.w700))]));
+  Widget build(BuildContext context) => Padding(padding: const EdgeInsets.symmetric(vertical: 9), child: Row(children: [Icon(icon, size: 20, color: const Color(0xFF5AAEFF)), const SizedBox(width: 12), Expanded(child: Text(title, style: const TextStyle(color: Color(0xFFB9C8D5)))), Text(status, style: const TextStyle(color: Color(0xFF27D77F), fontSize: 11, fontWeight: FontWeight.w700))]));
 }
