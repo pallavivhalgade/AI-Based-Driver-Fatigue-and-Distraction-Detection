@@ -336,7 +336,7 @@ class _SafetyHome extends StatelessWidget {
                   const SizedBox(height: 8),
                   const Text('Monitor fatigue, yawning and driver attention in real time.', style: TextStyle(color: Color(0xFF9BB0C1), height: 1.45)),
                   const SizedBox(height: 20),
-                  SizedBox(width: double.infinity, height: 56, child: FilledButton.icon(onPressed: _start, icon: const Icon(Icons.videocam_outlined), label: const Text('Start Monitoring', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16)))),
+                  SizedBox(width: double.infinity, height: 56, child: FilledButton.icon(onPressed: () => _start(context), icon: const Icon(Icons.videocam_outlined), label: const Text('Start Monitoring', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16)))),
                 ],
               ),
             ),
@@ -389,5 +389,15 @@ class _ProtectionRow extends StatelessWidget {
   final String status;
   const _ProtectionRow(this.icon, this.title, this.status);
   @override
-  Widget build(BuildContext context) => Padding(padding: const EdgeInsets.symmetric(vertical: 9), child: Row(children: [Icon(icon, size: 20, color: const Color(0xFF5AAEFF)), const SizedBox(width: 12), Expanded(child: Text(title, style: const TextStyle(color: Color(0xFFB9C8D5)))), Text(status, style: const TextStyle(color: Color(0xFF27D77F), fontSize: 11, fontWeight: FontWeight.w700))]));
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 9),
+        child: Row(
+          children: [
+            Icon(icon, size: 20, color: const Color(0xFF5AAEFF)),
+            const SizedBox(width: 12),
+            Expanded(child: Text(title, style: const TextStyle(color: Color(0xFFB9C8D5)))),
+            Text(status, style: const TextStyle(color: Color(0xFF27D77F), fontSize: 11, fontWeight: FontWeight.w700)),
+          ],
+        ),
+      );
 }
