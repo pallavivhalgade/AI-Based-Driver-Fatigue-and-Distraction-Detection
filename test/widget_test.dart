@@ -4,12 +4,12 @@ import 'package:driver_monitor_app/main.dart';
 
 void main() {
   testWidgets('DriverGuard polished app renders', (tester) async {
-    await tester.pumpWidget(const DriverGuardApp());
+    await tester.pumpWidget(const DriverGuardPolishedApp());
 
-    // Allow the splash navigation timer to complete.
+    // Let the splash navigation complete so no timer remains pending.
     await tester.pump(const Duration(milliseconds: 1200));
-    await tester.pumpAndSettle();
+    await tester.pump();
 
-    expect(find.byType(DriverGuardApp), findsOneWidget);
+    expect(find.byType(DriverGuardPolishedApp), findsOneWidget);
   });
 }
